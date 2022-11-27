@@ -59,6 +59,7 @@
 - Translations.
 - Platform availability.
 - Draft/publish status.
+- Edit history.
 - Notification texts for event updates.
   - Announcement.
   - Signup receipt/rejection.
@@ -109,4 +110,4 @@ For PoC/demo purposes I will use a simple MSSQL database and the EF Core ORM.
 
 The API services would most likely benefit from the scalability of a serverless architecture. How many individual services to create will depend on how much functionality is considered basic vs. additional or optional and some platforms/consumers may only need a limited set of features.
 I have very limited experience with serverless APIs so for PoC/demo purposes I will try to illustrate separation of concerns in a classic .Net API.
-I will assume authentication is handled by other services. 
+I will assume authentication is handled by other services. I will brush up on REST and GraphQL if I have time.
