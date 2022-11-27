@@ -49,14 +49,16 @@
 - Signup/cancellation timespan.
 - Name.
 - Description.
-- Accessibility?
+- Physical accessibility info?
 - Free/ticket prices (market/participant specific).
 - Cancellable/refundable.
 - Internal information.
   - Event coordinator and other admin roles.
   - Third parties (venues, vendors, entertainment etc.).  
   - Economy (catering, giveaways, event requirements etc.).
-- Translations (probably skip this for PoC).
+- Translations.
+- Platform availability.
+- Draft/publish status.
 - Notification texts for event updates.
   - Announcement.
   - Signup receipt/rejection.
@@ -74,3 +76,37 @@
   - Age or child/adult participant type (special needs?).
   - Partial participation?
 - Tickets
+
+### Thoughts on implementation
+
+**Scalability**
+- Expected number of users?
+- Expected number of events?
+- Expected number of notifiations per user per event?
+- Possible peak loads/zones?
+
+**Storage**
+- Some type of data storage is required.
+- Depending on scalability needs:
+  - Relational Db.
+  - NoSql.
+  - Event store.
+  - File based / blob storage.
+- Information security is important.
+- Geographical location of data could be important for both security, legal and performance perspectives.
+
+**Services**
+- Event admin API.
+- Event participant API.
+- Notification service.
+- Could be APIs with many endpoints.
+- Could be serverless/microservices with few endpoints.
+
+As the solution should be hosted on AWS, some knowledge of the services and scalability options available is required to be able to make specific implementation decisions. I have no experience with AWS, but will assume that services comparable to Azure services are available. 
+
+For data storage, I am most experienced in classic relational db design and implementation. These services would most likely have global availability and scalability needs, for which a relation db may or may not be sufficient. Were this a real task, I would invest quite some time into considering the various options. 
+For PoC/demo purposes I will use a simple MSSQL database and the EF Core ORM.
+
+The API services would most likely benefit from the scalability of a serverless architecture. How many individual services to create will depend on how much functionality is considered basic vs. additional or optional and some platforms/consumers may only need a limited set of features.
+I have very limited experience with serverless APIs so for PoC/demo purposes I will try to illustrate separation of concerns in a classic .Net API.
+I will assume authentication is handled by other services.
