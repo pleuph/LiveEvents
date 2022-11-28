@@ -5,12 +5,12 @@ using LiveEvents.Models;
 
 namespace LiveEvents.Services
 {
-    public class LiveEventsAdminService : ILiveEventsAdminService
+    public class LiveEventAdminService : ILiveEventAdminService
     {
-        readonly ILiveEventsAdminRepository liveEventAdminRepository;
+        readonly ILiveEventAdminRepository liveEventAdminRepository;
         readonly IMapper mapper;
 
-        public LiveEventsAdminService(ILiveEventsAdminRepository liveEventAdminRepository, IMapper mapper)
+        public LiveEventAdminService(ILiveEventAdminRepository liveEventAdminRepository, IMapper mapper)
         {
             this.liveEventAdminRepository = liveEventAdminRepository;
             this.mapper = mapper;
@@ -23,9 +23,9 @@ namespace LiveEvents.Services
             return mapper.Map<IEnumerable<LiveEventSummaryResponse>>(result);
         }
 
-        public async Task<int> AddLiveEvent(AddLiveEventRequest addLiveEventRequest, int userId)
+        public async Task<int> AddLiveEvent(AddLiveEventRequest request, int userId)
         {
-            var liveEvent = mapper.Map<LiveEvent>(addLiveEventRequest);
+            var liveEvent = mapper.Map<LiveEvent>(request);
             liveEvent.CreatedByUserId = userId;
             return await liveEventAdminRepository.AddLiveEvent(liveEvent);
         }

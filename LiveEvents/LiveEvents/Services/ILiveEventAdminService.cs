@@ -2,7 +2,7 @@
 
 namespace LiveEvents.Services
 {
-    public interface ILiveEventsAdminService
+    public interface ILiveEventAdminService
     {
         Task<int> AddLiveEvent(AddLiveEventRequest addLiveEventRequest, int userId);
         Task<IEnumerable<LiveEventSummaryResponse>> GetLiveEventSummaries(bool onlyFutureEvents);

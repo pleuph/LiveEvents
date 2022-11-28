@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LiveEvents.Data.Repositories
 {
-    public class LiveEventsAdminRepository : ILiveEventsAdminRepository
+    public class LiveEventAdminRepository : ILiveEventAdminRepository
     {
         readonly LiveEventsDbContext liveEventsDbContext;
 
-        public LiveEventsAdminRepository(LiveEventsDbContext liveEventsDbContext)
+        public LiveEventAdminRepository(LiveEventsDbContext liveEventsDbContext)
         {
             this.liveEventsDbContext = liveEventsDbContext;
         }
@@ -19,14 +19,14 @@ namespace LiveEvents.Data.Repositories
             if (onlyFutureEvents)
                 query = query.Where(a => a.StartDate > DateTime.UtcNow);
 
-            var summaries =
-                query.Select(a => new LiveEventSummary
-                {
-                    Id = a.Id,
-                    Name = a.Name,
-                    StartDate = a.StartDate,
-                    ParticipantCount = a.Participants.Count(b => b.Status == ParticipantStatus.Participating)
-                }).OrderBy(a => a.StartDate);
+            var summaries = query
+                .OrderBy(a => a.StartDate)
+                .Select(a => new LiveEventSummary(
+                    a.Id,
+                    a.Name,
+                    a.StartDate,
+                    a.Participants.Count(b => b.Status == ParticipantStatus.Participating))
+                );
 
             return await summaries.ToArrayAsync();
         }

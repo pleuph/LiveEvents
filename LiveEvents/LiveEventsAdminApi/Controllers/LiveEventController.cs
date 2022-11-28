@@ -8,9 +8,9 @@ namespace LiveEventsAdminApi.Controllers
     [Route("[controller]")]
     public class LiveEventController : ControllerBase
     {
-        readonly ILiveEventsAdminService liveEventAdminService;
+        readonly ILiveEventAdminService liveEventAdminService;
 
-        public LiveEventController(ILiveEventsAdminService liveEventAdminService)
+        public LiveEventController(ILiveEventAdminService liveEventAdminService)
         {
             this.liveEventAdminService = liveEventAdminService;
         }

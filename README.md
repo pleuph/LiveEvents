@@ -49,6 +49,7 @@
 - Signup/cancellation timespan.
 - Name.
 - Description.
+- Type/Category.
 - Physical accessibility info?
 - Free/ticket prices (market/participant specific).
 - Cancellable/refundable.
@@ -77,6 +78,7 @@
   - Age or child/adult participant type (special needs?).
   - Partial participation?
 - Tickets
+- Previous events (pictures/memories?)
 
 ### Thoughts on implementation
 

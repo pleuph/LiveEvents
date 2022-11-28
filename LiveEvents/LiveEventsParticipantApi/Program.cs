@@ -15,8 +15,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<LiveEventsDbContext>(options =>
     options.UseSqlServer("Server=localhost;Database=LiveEvents;Integrated Security=True;TrustServerCertificate=True;"));
 
-builder.Services.AddTransient<ILiveEventAdminRepository, LiveEventAdminRepository>();
-builder.Services.AddTransient<ILiveEventAdminService, LiveEventAdminService>();
+builder.Services.AddTransient<ILiveEventParticipantRepository, LiveEventParticipantRepository>();
+builder.Services.AddTransient<ILiveEventParticipantService, LiveEventParticipantService>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
