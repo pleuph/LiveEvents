@@ -8,7 +8,9 @@ namespace LiveEvents.Services
     {
         public AutoMapperProfile()
         {
-            CreateMap<LiveEventSummary, LiveEventSummaryDto>();
+            CreateMap<LiveEventSummary, LiveEventSummaryResponse>();
+
+            CreateMap<AddLiveEventRequest, LiveEvent>();
         }
     }
 }

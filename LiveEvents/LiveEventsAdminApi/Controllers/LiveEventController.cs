@@ -15,10 +15,17 @@ namespace LiveEventsAdminApi.Controllers
             this.liveEventAdminService = liveEventAdminService;
         }
 
-        [HttpGet(Name = "GetLiveEventSummaries")]
-        public async Task<IEnumerable<LiveEventSummaryDto>> GetLiveEventSummaries(bool onlyFutureEvents)
+        [HttpGet, Route("summaries/{onlyFutureEvents}")]
+        public async Task<IEnumerable<LiveEventSummaryResponse>> GetLiveEventSummaries(bool onlyFutureEvents)
         {
             return await liveEventAdminService.GetLiveEventSummaries(onlyFutureEvents);
+        }
+
+        [HttpPut, Route("")]
+        public async Task<int> AddLiveEvent(AddLiveEventRequest addLiveEventRequest)
+        {
+            var userId = 12; // Get from HttpContext.User
+            return await liveEventAdminService.AddLiveEvent(addLiveEventRequest, userId);
         }
     }
 }

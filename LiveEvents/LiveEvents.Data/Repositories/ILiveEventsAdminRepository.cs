@@ -4,6 +4,7 @@ namespace LiveEvents.Data.Repositories
 {
     public interface ILiveEventsAdminRepository
     {
+        Task<int> AddLiveEvent(LiveEvent liveEvent);
         Task<IEnumerable<LiveEventSummary>> GetLiveEventSummaries(bool onlyFutureEvents);
     }
 }

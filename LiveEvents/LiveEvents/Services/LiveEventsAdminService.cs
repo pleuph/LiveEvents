@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LiveEvents.Data.Models;
 using LiveEvents.Data.Repositories;
 using LiveEvents.Models;
 
@@ -15,11 +16,18 @@ namespace LiveEvents.Services
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<LiveEventSummaryDto>> GetLiveEventSummaries(bool onlyFutureEvents)
+        public async Task<IEnumerable<LiveEventSummaryResponse>> GetLiveEventSummaries(bool onlyFutureEvents)
         {
             var result = await liveEventAdminRepository.GetLiveEventSummaries(onlyFutureEvents);
 
-            return mapper.Map<IEnumerable<LiveEventSummaryDto>>(result);
+            return mapper.Map<IEnumerable<LiveEventSummaryResponse>>(result);
+        }
+
+        public async Task<int> AddLiveEvent(AddLiveEventRequest addLiveEventRequest, int userId)
+        {
+            var liveEvent = mapper.Map<LiveEvent>(addLiveEventRequest);
+            liveEvent.CreatedByUserId = userId;
+            return await liveEventAdminRepository.AddLiveEvent(liveEvent);
         }
     }
 }

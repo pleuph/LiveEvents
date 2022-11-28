@@ -26,9 +26,16 @@ namespace LiveEvents.Data.Repositories
                     Name = a.Name,
                     StartDate = a.StartDate,
                     ParticipantCount = a.Participants.Count(b => b.Status == ParticipantStatus.Participating)
-                });
+                }).OrderBy(a => a.StartDate);
 
             return await summaries.ToArrayAsync();
+        }
+
+        public async Task<int> AddLiveEvent(LiveEvent liveEvent)
+        {
+            liveEventsDbContext.LiveEvents.Add(liveEvent);
+            await liveEventsDbContext.SaveChangesAsync();
+            return liveEvent.Id;
         }
     }
 }

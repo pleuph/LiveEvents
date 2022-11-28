@@ -4,6 +4,7 @@ namespace LiveEvents.Services
 {
     public interface ILiveEventsAdminService
     {
-        Task<IEnumerable<LiveEventSummaryDto>> GetLiveEventSummaries(bool onlyFutureEvents);
+        Task<int> AddLiveEvent(AddLiveEventRequest addLiveEventRequest, int userId);
+        Task<IEnumerable<LiveEventSummaryResponse>> GetLiveEventSummaries(bool onlyFutureEvents);
     }
 }
