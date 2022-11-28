@@ -8,7 +8,7 @@ namespace LiveEvents.Data
         public LiveEventsDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<LiveEventsDbContext>();
-            optionsBuilder.UseSqlServer("Server=localhost;Database=LiveEvents;Integrated Security=True;",
+            optionsBuilder.UseSqlServer("Server=localhost;Database=LiveEvents;Integrated Security=True;TrustServerCertificate=True;",
                 a => a.MigrationsHistoryTable("__EFMigrationsHistory"));
 
             var context = Activator.CreateInstance(typeof(LiveEventsDbContext), optionsBuilder.Options) as LiveEventsDbContext;

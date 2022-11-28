@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<LiveEventsDbContext>(options =>
-    options.UseSqlServer("Server=localhost;Database=LiveEvents;Integrated Security=True;"));
+    options.UseSqlServer("Server=localhost;Database=LiveEvents;Integrated Security=True;TrustServerCertificate=True;"));
 
 builder.Services.AddTransient<ILiveEventsAdminRepository, LiveEventsAdminRepository>();
 builder.Services.AddTransient<ILiveEventsAdminService, LiveEventsAdminService>();
