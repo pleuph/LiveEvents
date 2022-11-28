@@ -2,7 +2,7 @@
 
 namespace LiveEvents.Models
 {
-    public record UpsertLiveEventParticipantRequest(
+    public record UpsertParticipantRequest(
         int LiveEventId,
         ParticipantStatus Status
     );

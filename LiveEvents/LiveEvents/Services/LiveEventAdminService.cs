@@ -29,5 +29,11 @@ namespace LiveEvents.Services
             liveEvent.CreatedByUserId = userId;
             return await liveEventAdminRepository.AddLiveEvent(liveEvent);
         }
+
+        public async Task<IEnumerable<ParticipantSummaryResponse>> GetParticipantSummaries(int liveEventId)
+        {
+            var participantSummaries = await liveEventAdminRepository.GetParticipantSummaries(liveEventId);
+            return mapper.Map<IEnumerable<ParticipantSummaryResponse>>(participantSummaries);
+        }
     }
 }

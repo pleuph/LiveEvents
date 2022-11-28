@@ -1,6 +1,6 @@
 ﻿namespace LiveEvents.Data.Models
 {
-    public record LiveEventParticipantSummary(
+    public record ParticipantLiveEventSummary(
         int Id,
         string Name,
         DateTime StartDate,

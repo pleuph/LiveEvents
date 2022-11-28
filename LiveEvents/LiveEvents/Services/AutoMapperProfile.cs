@@ -12,9 +12,11 @@ namespace LiveEvents.Services
 
             CreateMap<AddLiveEventRequest, LiveEvent>();
 
-            CreateMap<LiveEventParticipantSummary, LiveEventParticipantSummaryResponse>();
+            CreateMap<ParticipantLiveEventSummary, ParticipantLiveEventSummaryResponse>();
 
-            CreateMap<UpsertLiveEventParticipantRequest, LiveEventParticipant>();
+            CreateMap<UpsertParticipantRequest, LiveEventParticipant>();
+
+            CreateMap<ParticipantSummary, ParticipantSummaryResponse>();
         }
     }
 }

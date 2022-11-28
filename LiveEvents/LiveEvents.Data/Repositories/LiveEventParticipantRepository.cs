@@ -12,7 +12,7 @@ namespace LiveEvents.Data.Repositories
             this.liveEventsDbContext = liveEventsDbContext;
         }
 
-        public async Task<IEnumerable<LiveEventParticipantSummary>> GetFutureLiveEventParticipantSummaries(int userId)
+        public async Task<IEnumerable<ParticipantLiveEventSummary>> GetFutureLiveEventParticipantSummaries(int userId)
         {
             var query =
                 from liveEvent in liveEventsDbContext.LiveEvents
@@ -23,7 +23,7 @@ namespace LiveEvents.Data.Repositories
                         .Select(a => a.Status)
                         .FirstOrDefault()
                 orderby liveEvent.StartDate
-                select new LiveEventParticipantSummary(
+                select new ParticipantLiveEventSummary(
                     liveEvent.Id,
                     liveEvent.Name,
                     liveEvent.StartDate,

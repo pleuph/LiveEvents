@@ -4,7 +4,7 @@ namespace LiveEvents.Services
 {
     public interface ILiveEventParticipantService
     {
-        Task<IEnumerable<LiveEventParticipantSummaryResponse>> GetFutureLiveEventParticipantSummaries(int userId);
-        Task UpsertLiveEventParticipant(UpsertLiveEventParticipantRequest request, int userId);
+        Task<IEnumerable<ParticipantLiveEventSummaryResponse>> GetFutureLiveEventParticipantSummaries(int userId);
+        Task UpsertLiveEventParticipant(UpsertParticipantRequest request, int userId);
     }
 }

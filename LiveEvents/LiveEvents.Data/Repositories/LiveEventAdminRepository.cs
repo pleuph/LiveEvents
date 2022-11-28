@@ -37,5 +37,16 @@ namespace LiveEvents.Data.Repositories
             await liveEventsDbContext.SaveChangesAsync();
             return liveEvent.Id;
         }
+
+        public async Task<IEnumerable<ParticipantSummary>> GetParticipantSummaries(int liveEventId)
+        {
+            var query =
+                from participant in liveEventsDbContext.LiveEventParticipants
+                where participant.LiveEventId == liveEventId
+                orderby participant.Status, participant.UserId
+                select new ParticipantSummary(participant.UserId, participant.Status);
+
+            return await query.ToArrayAsync();
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace LiveEvents.Models
 {
-    public record LiveEventParticipantSummaryResponse(
+    public record ParticipantLiveEventSummaryResponse(
         int Id,
         string Name,
         DateTime StartDate,

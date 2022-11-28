@@ -16,7 +16,7 @@ namespace LiveEventsAdminApi.Controllers
         }
 
         [HttpGet, Route("summaries")]
-        public async Task<IEnumerable<LiveEventParticipantSummaryResponse>> GetFutureLiveEventSummaries()
+        public async Task<IEnumerable<ParticipantLiveEventSummaryResponse>> GetFutureLiveEventSummaries()
         {
             var userId = 16; // Get from HttpContext.User
             return await liveEventParticipantService.GetFutureLiveEventParticipantSummaries(userId);

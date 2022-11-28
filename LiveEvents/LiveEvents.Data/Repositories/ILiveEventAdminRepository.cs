@@ -6,5 +6,6 @@ namespace LiveEvents.Data.Repositories
     {
         Task<int> AddLiveEvent(LiveEvent liveEvent);
         Task<IEnumerable<LiveEventSummary>> GetLiveEventSummaries(bool onlyFutureEvents);
+        Task<IEnumerable<ParticipantSummary>> GetParticipantSummaries(int liveEventId);
     }
 }

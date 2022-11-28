@@ -4,7 +4,7 @@ namespace LiveEvents.Data.Repositories
 {
     public interface ILiveEventParticipantRepository
     {
-        Task<IEnumerable<LiveEventParticipantSummary>> GetFutureLiveEventParticipantSummaries(int userId);
+        Task<IEnumerable<ParticipantLiveEventSummary>> GetFutureLiveEventParticipantSummaries(int userId);
         Task UpsertLiveEventParticipant(LiveEventParticipant liveEventParticipant);
     }
 }

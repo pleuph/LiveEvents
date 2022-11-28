@@ -16,13 +16,13 @@ namespace LiveEvents.Services
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<LiveEventParticipantSummaryResponse>> GetFutureLiveEventParticipantSummaries(int userId)
+        public async Task<IEnumerable<ParticipantLiveEventSummaryResponse>> GetFutureLiveEventParticipantSummaries(int userId)
         {
             var liveEventParticipantSummaries = await liveEventParticipantRepository.GetFutureLiveEventParticipantSummaries(userId);
-            return mapper.Map<IEnumerable<LiveEventParticipantSummaryResponse>>(liveEventParticipantSummaries);
+            return mapper.Map<IEnumerable<ParticipantLiveEventSummaryResponse>>(liveEventParticipantSummaries);
         }
 
-        public async Task UpsertLiveEventParticipant(UpsertLiveEventParticipantRequest request, int userId)
+        public async Task UpsertLiveEventParticipant(UpsertParticipantRequest request, int userId)
         {
             var liveEventParticipant = mapper.Map<LiveEventParticipant>(request);
             liveEventParticipant.UserId = userId;
