@@ -25,7 +25,7 @@ namespace LiveEvents.Data.Repositories
                     a.Id,
                     a.Name,
                     a.StartDate,
-                    a.Participants.Count(b => b.Status == ParticipantStatus.Participating))
+                    a.Participants.Count(b => b.Status > ParticipantStatus.None))
                 );
 
             return await summaries.ToArrayAsync();
