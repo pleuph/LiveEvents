@@ -52,6 +52,7 @@
 - Type/Category.
 - Physical accessibility info?
 - Free/ticket prices (market/participant specific).
+- Campaigns, promo codes etc.
 - Cancellable/refundable.
 - Internal information.
   - Event coordinator and other admin roles.
