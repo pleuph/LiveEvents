@@ -96,20 +96,52 @@
   - Event store.
   - File based / blob storage.
 - Information security is important.
-- Geographical location of data could be important for both security, legal and performance perspectives.
+- Geographical location or replication of data could be factors important for both security, legal and performance perspectives.
 
 **Services**
 - Event admin API.
 - Event participant API.
 - Notification service.
+- Ticket service?
 - Could be APIs with many endpoints.
 - Could be serverless/microservices with few endpoints.
+- Caching, especially of the more static data.
 
 As the solution should be hosted on AWS, some knowledge of the services and scalability options available is required to be able to make specific implementation decisions. I have no experience with AWS, but will assume that services comparable to Azure services are available. 
 
-For data storage, I am most experienced in classic relational db design and implementation. These services would most likely have global availability and scalability needs, for which a relation db may or may not be sufficient. Were this a real task, I would invest quite some time into considering the various options. 
+For data storage, I am most experienced in classic relational db design and implementation. These services would most likely have global availability and scalability needs, for which a relation db may or may not be sufficient. I would recommend investing quite some time into considering the various options. 
 For PoC/demo purposes I will use a simple MSSQL database and the EF Core ORM.
 
 The API services would most likely benefit from the scalability of a serverless architecture. How many individual services to create will depend on how much functionality is considered basic vs. additional or optional and some platforms/consumers may only need a limited set of features.
 I have very limited experience with serverless APIs so for PoC/demo purposes I will try to illustrate separation of concerns in a classic .Net API.
 I will assume authentication is handled by other services. I will brush up on REST and GraphQL if I have time.
+
+## Demo
+
+### Implemented
+- Two .Net APIs.
+  - Admin.
+  - Participant.
+- Common logic libraries, with some spearation of functionality.
+  - Service lib.
+  - Data lib.
+- Storage is MSSQL with EF Core.
+  - Model as code.
+  - Deployed via migrations.
+- Models mapped with AutoMapper.
+
+### Limitations
+- No error handling.
+- No logging.
+- No tests.
+- Very limited data model.
+- Probably not proper REST.
+- No caching.
+- Not properly configurable.
+- Suitability for serverless deployment unknown.
+
+## Solution recommendations
+SQL Db or SQL + NoSQL.
+Serverless - Admin (maybe multiple), Participant (maybe multiple), Tickets + more.
+Notifications in scheduled job.
+Caching or caching + redundancy (specific data for consumption) - Admin editing probably more static after publishing events for consumers.
