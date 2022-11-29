@@ -110,7 +110,7 @@
 
 As the solution should be hosted on AWS, some knowledge of the services and scalability options available is required to be able to make specific implementation decisions. I have no experience with AWS, but will assume that services comparable to Azure services are available. 
 
-For data storage, I am most experienced in classic relational db design and implementation. These services would most likely have global availability and scalability needs, for which a relation db may or may not be sufficient. I would recommend investing quite some time into considering the various options. 
+For data storage, I am most experienced in classic relational db design and implementation. These services would most likely have global availability and scalability needs, for which a relation db may or may not be sufficient. 
 For PoC/demo purposes I will use a simple MSSQL database and the EF Core ORM.
 
 The API services would most likely benefit from the scalability of a serverless architecture. How many individual services to create will depend on how much functionality is considered basic vs. additional or optional and some platforms/consumers may only need a limited set of features.
@@ -135,14 +135,26 @@ I will assume authentication is handled by other services. I will brush up on RE
 - No error handling.
 - No logging.
 - No tests.
+- No caching.
+- No authentication.
+- Not properly configurable.
+- No indices in db except for PKs.
 - Very limited data model.
 - Probably not proper REST.
-- No caching.
-- Not properly configurable.
 - Suitability for serverless deployment unknown.
 
 ## Solution recommendations
-SQL Db or SQL + NoSQL.
-Serverless - Admin (maybe multiple), Participant (maybe multiple), Tickets + more.
-Notifications in scheduled job.
-Caching or caching + redundancy (specific data for consumption) - Admin editing probably more static after publishing events for consumers.
+
+**Storage**
+An SQL or similar relational database will probably be sufficient for most of the admin functionality. Depending on developer knowledge, building and maintaining a relational database and data model is a tried and tested approach with great tooling support. Some databases, like Azure SQL also offer great scaling and automatic performance improvements based on actual usage. I would suspect that most of the publicly available information about events will be quite static and easy to cache and/or geo-replicate. A lot of information requests would probably also be initiated by notifications, meaning some of the peak loads can be balanced by staggering notifications.
+
+For the participant side the information is both general and personal, making parts of it harder to cache. There may also be more unexpected peak loads to handle. Some tailored redundancy in the form of a NoSql or document based storage could possibly help mitigate that. There may also be legal and security considerations in terms of the physical storage location.
+
+For most types of data I would assume that a high degree of edit history is desirable for support and accountability purposes. This could speak to the feasibility of some type of event store, which can be based on native cloud services or other types of storage. 
+
+A solution based on SQL + some additional, more specific purpose storage could be effective. 
+
+**Services**
+With global usage and scalability in mind, I believe serverless services with very few purposes each could be a good approach. I foresee the need for a few core services to cover the basic functionality for both admins and participants, and then a host of other services for tickets, campaigns, internal notes etc. At least one scheduled job is required for sending out notifications, possibly one for each channel (email, push etc.).
+
+I would assume that existing authentication and profile services will be able to handle authentication. Ther may already be an existing API management or gateway system to handle auth as well as some or all of the caching requirements for API responses.
